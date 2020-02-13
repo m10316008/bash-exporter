@@ -1,3 +1,3 @@
 #!/bin/sh
-echo '{"labels": {"hostname":"frontend","env":"v0.7.7"}, "results": {"check": 0} }'
+echo '{"labels": { "group":"frontend","project":"inno-chatroom","gitlab":"v0.7.7","docker":"","msg":" tag_name tag_cimmit" }, "results": {"check": 0} }'
 exit 0

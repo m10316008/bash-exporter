@@ -79,12 +79,19 @@ do
             test "${DOCKER_SHA256_TAG}" != "${DOCKER_SHA256_PROD}" && MSG=`echo "${MSG} tag_prod"`
         fi
         #echo -e "Group: \033[32m${PROJECT_NAMESPACE}\033[0m \t Project: \033[34m${PROJECT_NAME}\033[0m \t Gitlab: \033[33m${GITLAB_PROJECT_LAST_TAG}\033[0m \t Docker: \033[35m${DOCKER_LAST_TAG}\033[0m \t Check: ${CHECK} \t \033[31m${MSG}\033[0m"
-        echo -e "[{"Group":"${PROJECT_NAMESPACE}","Project":"${PROJECT_NAME}","Gitlab":"${GITLAB_PROJECT_LAST_TAG}","Docker":"${DOCKER_LAST_TAG}","Check":"${CHECK}","log":"${MSG}"}]"
-        cat <<EOF > /root/bash2/examples/${PROJECT_NAME}.sh
+        echo -e "[{"Group":"${PROJECT_NAMESPACE}","Project":"${PROJECT_NAME}","Gitlab":"${GITLAB_PROJECT_LAST_TAG}","Docker":"${DOCKER_LAST_TAG}","Check":"${CHECK}","debug":"${MSG}"}]"
+        cat <<EOF > /root/bash-exporter/examples/${PROJECT_NAME}.sh
 #!/bin/sh
-echo '{"labels": {"hostname":"${PROJECT_NAMESPACE}","env":"${GITLAB_PROJECT_LAST_TAG}"}, "results": {"check": ${CHECK}} }'
+echo '{"labels": { \
+"group":"${PROJECT_NAMESPACE}",\
+"project":"${PROJECT_NAME}",\
+"gitlab":"${GITLAB_PROJECT_LAST_TAG}",\
+"docker":"${DOCKER_LAST_TAG}",\
+"msg":"${MSG}" \
+},\
+ "results": {"check": ${CHECK}} }'
 exit 0
 EOF
-chmod 755 /root/bash2/examples/${PROJECT_NAME}.sh
+chmod 755 /root/bash-exporter/examples/${PROJECT_NAME}.sh
     done
 done

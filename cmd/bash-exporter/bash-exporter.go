@@ -22,9 +22,9 @@ var (
 
 func main() {
 	addr := flag.String("web.listen-address", ":9300", "Address on which to expose metrics")
-	interval := flag.Int("interval", 300, "Interval for metrics collection in seconds")
+	interval := flag.Int("interval", 90, "Interval for metrics collection in seconds")
 	path := flag.String("path", "/scripts", "path to directory with bash scripts")
-	labels := flag.String("labels", "hostname,env", "additioanal labels")
+	labels := flag.String("labels", "group,project,gitlab,docker,msg", "additioanal labels")
 	prefix := flag.String("prefix", "bash", "Prefix for metrics")
 	debug := flag.Bool("debug", false, "Debug log level")
 	flag.Parse()

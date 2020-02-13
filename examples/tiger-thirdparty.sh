@@ -1,3 +1,3 @@
 #!/bin/sh
-echo '{"labels": {"hostname":"java-backend","env":"v0.9.0"}, "results": {"check": 1} }'
+echo '{"labels": { "group":"java-backend","project":"tiger-thirdparty","gitlab":"v0.9.0","docker":"","msg":" tag_name" }, "results": {"check": 0} }'
 exit 0
